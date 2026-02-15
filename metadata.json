@@ -1,0 +1,7 @@
+{
+  "name": "Purest API Builder Agent",
+  "description": "An intelligent workbench to build, configure, and generate expressive REST API clients using the Purest library logic.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
