@@ -46,8 +46,8 @@ Run these from the project folder after `npm install`:
 
 ## Portable Drive Workspace (USB20FD)
 
-When this project lives at `dev/projects/Purest_API_Manager` on the `USB20FD` drive, follow the drive's own `AGENTS.md` rules:
+When this project lives at `dev/projects/Purest_API_Manager` on the `USB20FD` drive, follow the drive's own `AGENTS.md` rules, except the "no secrets on the drive" rule, which is relaxed for this project:
 
-*   **No `.env.local` on the drive.** Keep `GEMINI_API_KEY` in macOS Keychain and inject it per run (for example with the drive's `keychain-env` helper) instead of writing it to a file.
+*   **`.env.local` is allowed on the drive.** The owner chose to drop the "no secrets on the drive" rule for this project, so `GEMINI_API_KEY` may live in `.env.local` next to the project. `.gitignore` already ignores `*.local`, so it is not committed. Never commit it or paste the key into a file that is committed. Anyone who gets the drive can read the key, so keep the drive with you and revoke the key if the drive is lost.
 *   **Do not keep `node_modules/` or `dist/` on the drive.** Copy the project to the Mac's internal disk (for example `~/Developer/Purest_API_Manager`) and run `npm install`, the verification commands and `npm run dev` from that copy, never from the drive folder, because they create `node_modules/` and `dist/` inside the project folder. Copy changes back to the drive (or commit and push) when you are done. `dist/` also contains the API key, because `vite.config.ts` bakes `GEMINI_API_KEY` into the built bundle, so never publish or share it.
-*   **Saved data lives in the browser profile.** The app stores configs, secrets and templates in `localStorage` (keys starting with `purest_`). That data is written to the browser's profile folder, so use a browser whose profile is on the Mac's internal disk, not on the drive. If a browser profile is kept on the drive, the saved secrets are written there too.
+*   **Saved data lives in the browser profile.** The app stores configs, secrets and templates in `localStorage` (keys starting with `purest_`). That data is written to the browser's profile folder. With secrets allowed on the drive, the profile may be kept on the drive too.
