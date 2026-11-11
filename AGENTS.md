@@ -36,3 +36,18 @@ This file provides context and instructions for AI agents working on this codeba
 *   **State Management:** Use React hooks (useState, useEffect, useContext) for state management.
 *   **Styling:** Follow the existing styling conventions.
 *   **Code Quality:** Ensure code is clean, readable, and well-documented.
+
+## Verification
+
+Run these from the project folder after `npm install`:
+
+*   **Type check:** `npx tsc --noEmit` (should print nothing).
+*   **Build:** `GEMINI_API_KEY=dummy npm run build` (should finish without errors). A dummy key is fine here because nothing calls Gemini during the build.
+
+## Portable Drive Workspace (USB20FD)
+
+When this project lives at `dev/projects/Purest_API_Manager` on the `USB20FD` drive, follow the drive's own `AGENTS.md` rules:
+
+*   **No `.env.local` on the drive.** Keep `GEMINI_API_KEY` in macOS Keychain and inject it per run (for example with the drive's `keychain-env` helper) instead of writing it to a file.
+*   **Do not keep `node_modules/` or `dist/` on the drive.** Run `npm install` on the Mac when needed. `dist/` also contains the API key, because `vite.config.ts` bakes `GEMINI_API_KEY` into the built bundle, so never publish or share it.
+*   **Saved data stays in the browser.** The app stores configs, secrets and templates in `localStorage` (keys starting with `purest_`), so nothing the app saves is written to the drive.
